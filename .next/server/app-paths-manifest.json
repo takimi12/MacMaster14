@@ -1,0 +1,14 @@
+{
+  "/_not-found": "app/_not-found.js",
+  "/api/webhook/route": "app/api/webhook/route.js",
+  "/categories/[categoryName]/[categoryPage]/page": "app/categories/[categoryName]/[categoryPage]/page.js",
+  "/cart/page": "app/cart/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/page": "app/page.js",
+  "/product/[productId]/page": "app/product/[productId]/page.js",
+  "/search/page": "app/search/page.js",
+  "/collections/[collection]/page": "app/collections/[collection]/page.js",
+  "/product/[productId]/opengraph-image/route": "app/product/[productId]/opengraph-image/route.js",
+  "/products/page": "app/products/page.js",
+  "/products/[page]/page": "app/products/[page]/page.js"
+}
