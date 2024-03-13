@@ -1,13 +1,16 @@
-import {  getAllProductsPaginated } from "@/app/api/product";
+import {   getAllProductsPaginated } from "@/app/api/product";
 import { ProductList } from "@/components/ProductList";
 import { SortOrder } from "@/components/SortByPrice";
 // Zmodyfikuj funkcję generującą statyczne parametry
-// export async function generateStaticParams() {
-// 	const count = await getAllProductsCount();
-// 	const numOfPages = Math.ceil(count / 20);; // Ustaw ilość produktów na stronie
-// 	const pages = Array.from({ length: numOfPages }, (_, i) => i + 1);
-// 	return pages.map((page) => ({ params: { page: page.toString() } }));
-// }
+export async function generateStaticParams() {
+	const products = await getAllProductsPaginated(1, 5,"");
+	const numOfPages = Math.ceil(products.length / 5); // Ustaw ilość produktów na stronie
+	const pages = Array.from({ length: numOfPages }, (_, i) => i + 1);
+	return pages.map((page) => ({ params: { page: page.toString() } }));
+}
+
+
+
 
 // Zmodyfikuj funkcję strony produktów
 export default async function ProductsPage({ params,searchParams }: { params: { page: string },searchParams?:{ [key: string]: string | undefined } }) {

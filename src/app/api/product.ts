@@ -63,10 +63,37 @@ function sortDESC(a:any, b:any) {
   }
 }
 
+
+
+
 export const getAllProductsCount=async ()=>{
 		const {productsConnection}= await executeGraphql(ProductsGetAllPaginatedDocument, { skip: 0, first: 20 })
 		return productsConnection.aggregate.count
 }
+// export const getProductsList = async (skip?: number, take?: number): Promise<Product[]> => {
+// 	const graphqlResponse = await executeGraphql(ProductsGetListDocument, { skip, take });
+
+// 	return graphqlResponse.products.map((product) => ({
+// 		id: product.id,
+// 		name: product.name,
+// 		description: product.description,
+// 		category: product.category.category_name,
+// 		image: {
+// 			src: product.product_image,
+// 			alt: product.name,
+// 		},
+// 		price: product.product_items[0].price,
+// 		product_items: product.product_items.map((item) => ({
+// 			id: item.id,
+// 			price: item.price,
+// 			images: item.product_images,
+// 			productId: product!.id,
+// 			quantityInStock: item.qty_in_stock,
+// 			SKU: item.SKU,
+// 		})),
+// 	}));
+// };
+
 
 
 export const getAllProductsPaginated = async (currentPage: number, perPage: number, sortOrder:string) => {
