@@ -1,13 +1,12 @@
-export default function HomePage() {
+import { getAllProductsPaginated, } from "@/app/api/product";
+import { ProductList } from "@/components/ProductList";
+
+export default async function HomePage() {
+	const products  = await getAllProductsPaginated(1, 20, "asc");
+
 	return (
 		<section className="mx-auto max-w-md p-12">
-			<ul data-testid="products-list">
-				<li>
-					<article>
-						<div></div>
-					</article>
-				</li>
-			</ul>
+			<ProductList products={products} />
 		</section>
 	);
 }

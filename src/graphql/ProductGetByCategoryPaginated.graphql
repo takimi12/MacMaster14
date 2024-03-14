@@ -1,0 +1,19 @@
+query ProductsGetByCategoryPaginated($skip: Int!, $first: Int!, $category: String!) {
+	products(skip: $skip, first: $first, orderBy: price_DESC) {
+		id
+		name
+		price
+		description
+		categories(where: { name_contains: $category }) {
+			name
+		}
+		images {
+			url
+		}
+	}
+	productsConnection {
+		aggregate {
+			count
+		}
+	}
+}

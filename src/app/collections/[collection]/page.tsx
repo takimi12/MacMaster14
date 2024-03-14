@@ -1,13 +1,17 @@
 import { getCollectionById, getCollectionsList } from "@/app/api/collection";
 import { ProductList } from "@/components/ProductList";
 
+export const metadata = {
+	title: "collections 1",
+};
+
 export default async function SingleCollectionPage({ params }: { params: { collection: string } }) {
 	const collection = await getCollectionById(params.collection);
-	
+
 	return (
 		<main className="mx-auto min-h-screen max-w-7xl">
 			<h1 className="pb-20 text-4xl font-extrabold first-letter:uppercase" role="heading">
-				{collection.name}
+				collections 1
 			</h1>
 			<ProductList products={collection.products} />
 		</main>
@@ -21,4 +25,3 @@ export async function generateStaticParams() {
 		id: collection.id,
 	}));
 }
-

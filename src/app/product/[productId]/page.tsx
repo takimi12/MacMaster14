@@ -11,14 +11,22 @@ import { Reviews } from "@/components/Reviews";
 import { revalidatePath } from 'next/cache'
 import { AddToCartButton } from "@/components/AddToCartButton";
 import { ProductList } from "@/components/ProductList";
+import { Metadata } from "next";
 
-// export async function generateMetadata({
-	// params,
-// }: {
-// 	params: { productId: string };
-// }): Promise<Metadata> {
-// 	return {};
-// }
+export async function generateMetadata({
+	params,
+}: {
+	params: { productId: string };
+}): Promise<Metadata> {
+	const { product } = await getProduct(params.productId);
+	if (!product) {
+		notFound();
+	}
+	return {
+		title: product.name,
+		description: product.description
+	};
+}
 
 export default async function SingleProductPage({ params }: { params: { productId: string } }) {
 	const { product } = await getProduct(params.productId);
@@ -39,7 +47,6 @@ export default async function SingleProductPage({ params }: { params: { productI
 	// 	return executeGraphql(CartCreateDocument, {email: email, stripeCheckoutId: stripeCheckoutId});
 	
 	// }
-
 	const addNewReview=async ({headline,content,name,email,rating}:any)=>{
 		"use server"
 		addAndPublishReview({id: params.productId, headline, content, name,email,rating});
@@ -56,7 +63,7 @@ export default async function SingleProductPage({ params }: { params: { productI
 			{product.variants ? <ProductVariant variants={product.variants as Variant[]} /> : null}
 			<AddToCartButton productName={product.name} />
 			
-			<div data-testid="releated-products"><ProductList products={similarProducts as unknown as ProductsGetAllPaginatedQuery["products"]} /></div>
+			<div data-testid="releated-products"><ProductList products={similarProducts.products as unknown as ProductsGetAllPaginatedQuery["products"]} /></div>
 		
 			
 			<Reviews productId={params.productId} reviews={productReviews.product?.reviews as Review[]} addReviewAction={addNewReview}/>

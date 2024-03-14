@@ -7,7 +7,7 @@ export const Navbar = () => {
 	return (
 		<nav className="mx-auto flex max-w-7xl justify-between p-6 py-10">
 			<Link href={"/"}>
-				<h2 className="-rotate-6 bg-zinc-950 p-2 text-3xl font-semibold text-zinc-50">ShopSync</h2>
+				<p className="-rotate-6 bg-zinc-950 p-2 text-3xl font-semibold text-zinc-50">ShopSync</p>
 			</Link>
 			<ul className="flex items-center gap-4">
 				<ActiveLink
@@ -34,7 +34,14 @@ export const Navbar = () => {
 					All
 				</ActiveLink>
 				<ActiveLink
-					href={"/categories" as Route}
+					href={"/collections/ckdu452ug0gxm0158pysyubmr" as Route}
+					className="border-b-2 border-b-transparent"
+					activeClassName="border-b-2 border-zinc-900"
+				>
+					collections 1
+				</ActiveLink>
+				<ActiveLink
+					href={"/categories/accessories/" as Route}
 					className="border-b-2 border-b-transparent"
 					activeClassName="border-b-2 border-zinc-900"
 				>
