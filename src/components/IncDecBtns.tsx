@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-export function ChangeQuantity({ itemId, quantity }: { itemId: string; quantity: number }) {
+export function ChangeQuantity({ productName, quantity }: { productName: string; quantity: number }) {
 	const [optimisticQuantity, setOptimisticQuantity] = useState(quantity);
 	const [reallyQuantity, setReallyQuantity] = useState(quantity);
 	const setOrderItemQuantity = useCallback(async () => {
@@ -19,7 +19,7 @@ export function ChangeQuantity({ itemId, quantity }: { itemId: string; quantity:
 				console.log("really quantity is not set and product was not changed");
 				break;
 		}
-	}, [itemId, reallyQuantity]);
+	}, [productName, reallyQuantity]);
 	useEffect(() => {
 		const delayTimeout = setTimeout(() => {
 			setReallyQuantity(optimisticQuantity);

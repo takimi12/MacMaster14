@@ -19,7 +19,7 @@ export const ProductList = ({ products }: { products: ProductsGetAllPaginatedQue
 						<p data-testid="product-price">{product.price}</p>
 						{/*@ts-ignore*/}
 						{product.avgRating ? (
-							<p data-testid="product-rating">{product.avgRating!}</p>
+							<p data-testid="product-rating">{(product as unknown as any).avgRating || 0}</p>
 						) : (
 							<p data-testid="product-rating">0</p>
 						)}
