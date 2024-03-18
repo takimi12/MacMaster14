@@ -10,15 +10,10 @@ export const SortOrder = () => {
 	const [sortValue, setSortValue] = useState(searchParams?.get("sort") ?? "asc");
 
 	useEffect(() => {
-		if (sortValue !==  "asc") {
-			const searchParams = sortValue ? `?sort=${encodeURIComponent(sortValue)}` : "";
+		const searchParams = sortValue ? `?sort=${encodeURIComponent(sortValue)}` : "";
 
-			// @ts-ignore
-			router.push(`${pathname}${searchParams}`);
-		} else {
-			// @ts-ignore
-			router.push(pathname);
-		}
+		// @ts-ignore
+		router.push(`${pathname}${searchParams}`);
 	}, [sortValue]);
 	const onChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const value = e.target.value;

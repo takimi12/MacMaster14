@@ -1,18 +1,20 @@
 "use client"
 import React from 'react'
-import {useCartContext} from "@/context/CartContext"
+// import {useCartContext} from "@/context/CartContext"
+import { useFormStatus } from "react-dom";
 
 
-
-export const AddToCartButton = ({productName}:{productName:string}) => {
+export const AddToCartButton = () => {
   
-    const {editProduct}=useCartContext()
+    const formStatus = useFormStatus();
 	
-	const addToCart=()=>{
-		editProduct(productName, "increase")
-	}
+	// const addToCart=async ()=>{
+	// 	editProduct(productName, "increase")
+	// }
   
     return (
-    <button data-testid="add-to-cart-button" onClick={addToCart}>Add to cart</button>
-  )
+			<button disabled={formStatus.pending} type="submit" data-testid="add-to-cart-button">
+				Add to cart
+			</button>
+		);
 }

@@ -1,8 +1,18 @@
 import { getAllProductsPaginated, } from "@/app/api/product";
 import { ProductList } from "@/components/ProductList";
+import { SortOrder } from "@/components/SortByPrice";
 
-export default async function ProductsPage() {
-	const products  = await getAllProductsPaginated(1, 20, "asc");
+export default async function ProductsPage({
+	searchParams,
+}: {
+	searchParams?: { [key: string]: string | undefined };
+}) {
+	const currentPage = 1; // Pobierz aktualną stronę z parametrów URL
+	const perPage = 4; // Ustaw ilość produktów na stronie
+	const { sort: sortValue } = searchParams as { sort: string };
+	const sortQuery = sortValue ?? "";
+
+	const products = await getAllProductsPaginated(currentPage, perPage, sortQuery);
 
 	return (
 		<>
@@ -12,6 +22,7 @@ export default async function ProductsPage() {
 					Thoughtfully designed objects for the workspace, home, and travel.
 				</p>
 			</div>
+			<SortOrder />
 			<ProductList products={products} />
 		</>
 	);

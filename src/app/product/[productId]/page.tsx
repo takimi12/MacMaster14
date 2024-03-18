@@ -12,6 +12,7 @@ import { revalidatePath } from 'next/cache'
 import { AddToCartButton } from "@/components/AddToCartButton";
 import { ProductList } from "@/components/ProductList";
 import { Metadata } from "next";
+import { editProductInCartAction } from "@/app/actions/addProductToCart";
 
 export async function generateMetadata({
 	params,
@@ -61,12 +62,23 @@ export default async function SingleProductPage({ params }: { params: { productI
 			<ProductListItemDescription name={product.name} />
 			<p>{product.description}</p>
 			{product.variants ? <ProductVariant variants={product.variants as Variant[]} /> : null}
-			<AddToCartButton productName={product.name} />
-			
-			<div data-testid="releated-products"><ProductList products={similarProducts.products as unknown as ProductsGetAllPaginatedQuery["products"]} /></div>
-		
-			
-			<Reviews productId={params.productId} reviews={productReviews.product?.reviews as Review[]} addReviewAction={addNewReview}/>
+			{/* <AddToCartButton productName={product.name} /> */}
+			<form action={editProductInCartAction}>
+				<input type="hidden" name="productName" value={product.name} />
+				<input type="hidden" name="action" value="increase" />
+				<AddToCartButton />
+			</form>
+			<div data-testid="related-products">
+				<ProductList
+					products={similarProducts.products as unknown as ProductsGetAllPaginatedQuery["products"]}
+				/>
+			</div>
+
+			<Reviews
+				productId={params.productId}
+				reviews={productReviews.product?.reviews as Review[]}
+				addReviewAction={addNewReview}
+			/>
 		</div>
 	);
 }

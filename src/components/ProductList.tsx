@@ -12,11 +12,19 @@ export const ProductList = ({ products }: { products: ProductsGetAllPaginatedQue
 				products.length === 4 && `xl:grid-cols-4`,
 			)}
 		>
-			{products.map((product) => {
-				return <div key={product.id}><ProductListItem  product={product} />
-				<p data-testid="product-price">{product.price}</p>
-				{/*@ts-ignore*/}
-				{product.avgRating ? <p data-testid="product-rating">{product.avgRating!}</p> : <p data-testid="product-rating">0</p>}</div> 
+			{products.map((product,index) => {
+				return (
+					<div key={product.id + index}>
+						<ProductListItem product={product} />
+						<p data-testid="product-price">{product.price}</p>
+						{/*@ts-ignore*/}
+						{product.avgRating ? (
+							<p data-testid="product-rating">{product.avgRating!}</p>
+						) : (
+							<p data-testid="product-rating">0</p>
+						)}
+					</div>
+				); 
 			})}
 		</ul>
 	);

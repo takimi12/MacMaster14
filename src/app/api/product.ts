@@ -99,6 +99,7 @@ export const getAllProductsCount=async ()=>{
 export const getAllProductsPaginated = async (currentPage: number, perPage: number, sortOrder:string) => {
 	const skip = (currentPage - 1) * perPage;
 	if(sortOrder==="asc"){
+		console.log("skip",skip,perPage)
 		const {products}= await executeGraphql(ProductsGetAllPaginatedAscDocument, { skip, first: perPage });
 		return products;
 	}else if(sortOrder==="averageRating_ASC"){
@@ -110,8 +111,11 @@ export const getAllProductsPaginated = async (currentPage: number, perPage: numb
 		console.log("avg desc")
 		const {products}= await executeGraphql(ProductsGetAllDocument,{})
 		return getProductsWithAvgRating(products).sort(sortDESC)
-	}else{
+	}else if(sortOrder==="desc"){
 		const {products}= await executeGraphql(ProductsGetAllPaginatedDocument, { skip, first: perPage });
+		return products;
+	}else{
+		const { products } = await executeGraphql(ProductsGetAllDocument,{});
 		return products;
 	}
 };

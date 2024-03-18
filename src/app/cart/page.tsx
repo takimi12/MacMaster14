@@ -1,24 +1,28 @@
-"use client";
+import { ChangeQuantity } from "@/components/IncDecBtns";
+import { ProductInCart } from "../actions/addProductToCart";
+import { cookies } from "next/headers";
+import { Suspense } from "react";
 
-import { ProductInCart, useCartContext } from "@/context/CartContext";
+export default async function CartPage() {
+	const cookieProduct = cookies().get("products");
 
-export default function CartPage() {
-  const { productsInCart,editProduct } = useCartContext();
-  const currentCart:ProductInCart[] = JSON.parse(productsInCart || "[]");
+	const currentCart: ProductInCart[] = cookieProduct
+		? JSON.parse(cookieProduct.value)
+		: ([] as ProductInCart[]);
 
-  if (!currentCart) {
-    return <p>Pusty koszyk!</p>;
-  }
-  return (
-    <section>
-      {currentCart.map((el) => (
-        <div key={el.name}>
-          <p>{el.name}</p>
-          <button data-test-id="decrement" onClick={()=>editProduct(el.name,"decrease")}>decrease</button>
-          <p data-testid="quantity">{el.quantity}</p>
-          <button data-test-id="increment" onClick={()=>editProduct(el.name,"increase")}>increase</button>
-        </div>
-      ))}
-    </section>
-  );
+	if (!currentCart) {
+		return <p>Pusty koszyk!</p>;
+	}
+	return (
+		<section>
+			{currentCart.map((el) => (
+				<div key={el.name}>
+					<p>{el.name}</p>
+					<Suspense fallback={<div data-testid="quantity">{el.quantity} </div>}>
+						<ChangeQuantity productName={el.name} quantity={el.quantity} />
+					</Suspense>
+				</div>
+			))}
+		</section>
+	);
 }

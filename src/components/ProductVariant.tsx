@@ -13,8 +13,8 @@ export const ProductVariant = ({variants}:{variants:Variant[]}) => {
   const [selectedVariant,setSelectedVariant]=useState<Variant|null>(null)
 
   return (
-    <div>{variants.map(el=><>
-      <button key={el.name} style={{backgroundColor: selectedVariant?.name===el.name ? "black" : "transparent"}} onClick={()=>setSelectedVariant(el)}>{el.name}</button>
+    <div>{variants.map((el,index)=><>
+      <button key={el.name+index} style={{backgroundColor: selectedVariant?.name===el.name ? "black" : "transparent"}} onClick={()=>setSelectedVariant(el)}>{el.name}</button>
     </>)}</div>
   )
 }

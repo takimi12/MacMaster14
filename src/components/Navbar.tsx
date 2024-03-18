@@ -41,7 +41,7 @@ export const Navbar = () => {
 					collections 1
 				</ActiveLink>
 				<ActiveLink
-					href={"/categories/accessories/" as Route}
+					href={"/categories/accessories/1" as Route}
 					className="border-b-2 border-b-transparent"
 					activeClassName="border-b-2 border-zinc-900"
 				>
