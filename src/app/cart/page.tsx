@@ -18,7 +18,7 @@ export default async function CartPage() {
 			{currentCart.map((el) => (
 				<div key={el.name}>
 					<p>{el.name}</p>
-					<Suspense fallback={<div data-testid="quantity">{el.quantity} </div>}>
+					<Suspense fallback={<div data-testid="quantity" aria-busy="true">{el.quantity} </div>}>
 						<ChangeQuantity productName={el.name} quantity={el.quantity} />
 					</Suspense>
 				</div>
