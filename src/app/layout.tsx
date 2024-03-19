@@ -5,7 +5,7 @@ import { Navbar } from "@/components/Navbar";
 import { CartContextProvider } from "@/context/CartContext"
 
 const inter = Inter({ subsets: ["latin"] });
-// update node
+// update node x2
 
 export const metadata: Metadata = {
 	title: "Create Next App",
